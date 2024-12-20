@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Тест - Шоссе в никуда</title>
+</head>
+<body>
+    <div class="content-container">
+        <header>
+            <h1>Шоссе в никуда</h1>
+            <nav>
+                <ul>
+                    <li><a href="description.htm">Описание</a></li>
+                    <li><a href="glossary.htm">Словарь</a></li>
+                    <li><a href="gallery.htm">Галерея</a></li>
+                    <li><a href="quiz.htm" class="active">Тест</a></li>
+                    <li><a href="profile.htm">Личный кабинет</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="main-container">
+                <h2>Тест на знание фильма</h2>
+                <form id="quizForm">
+                    <div>
+                        <label>1. В каком году вышел фильм?</label>
+                        <input type="text" name="question1" required>
+                        <span class="result" id="result1"></span>
+                    </div>
+                    <div>
+                        <label>2. Какой жанр у фильма?</label>
+                        <input type="text" name="question2" required>
+                        <span class="result" id="result2"></span>
+                    </div>
+                    <div>
+                        <label>3. Кто режиссёр фильма?</label>
+                        <input type="text" name="question3" required>
+                        <span class="result" id="result3"></span>
+                    </div>
+                    <button type="button" onclick="checkAnswers()">Проверить</button>
+                    <button type="button" onclick="resetQuiz()">Начать тест заново</button>
+                </form>
+                <p id="score"></p>
+            </div>
+        </main>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>

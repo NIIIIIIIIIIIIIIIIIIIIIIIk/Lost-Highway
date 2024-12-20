@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Галерея - Шоссе в никуда</title>
+</head>
+<body>
+    <div class="content-container">
+        <header>
+            <h1>Шоссе в никуда</h1>
+        </header>
+
+        <main>
+            <div class="main-container">
+                <h2>Форма авторизации</h2>
+                <form id="authForm" method="post" action="description.htm" onsubmit="return loadProfile()">
+                    <label for="username">Логин (4-10 символов):</label>
+                    <input type="text" id="username" name="username" required pattern="[а-яА-ЯёЁa-zA-Z0-9]{4,10}">
+                    <span class="error" id="usernameError"></span>
+                
+                    <label for="dob">Дата рождения:</label>
+                    <input type="date" id="dob" name="dob" required min="1950-01-01" max="2023-10-01">
+                    <span class="error" id="dobError"></span>
+                
+                    <label for="gender">Пол:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">Выберите пол</option>
+                        <option value="male">Мужской</option>
+                        <option value="female">Женский</option>
+                    </select>
+                
+                    <button type="submit">Войти</button>
+                </form>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2023</p>
+        </footer>
+    </div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>

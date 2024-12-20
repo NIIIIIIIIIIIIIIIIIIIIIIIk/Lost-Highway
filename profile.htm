@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Профиль пользователя</title>
+</head>
+<body>
+    <div class="content-container">
+        <header>
+            <h1>Профиль пользователя</h1>
+            <nav>
+                <ul>
+                    <li><a href="description.htm" class="active">Описание</a></li>
+                    <li><a href="glossary.htm">Словарь</a></li>
+                    <li><a href="gallery.htm">Галерея</a></li>
+                    <li><a href="quiz.htm">Тест</a></li>
+                    <li><a href="profile.htm">Личный кабинет</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="main-container">
+                <h2>Информация о пользователе</h2>
+                <p><strong>Логин:</strong> <span id="profileUsername"></span></p>
+                <p><strong>Дата рождения:</strong> <span id="profileDob"></span></p>
+                <p><strong>Пол:</strong> <span id="profileGender"></span></p>
+
+                <button onclick="logout()">Выйти</button>
+                <button onclick="loadResults()">Загрузить результат последней попытки</button>
+                <p id="score"></p>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2023</p>
+        </footer>
+    </div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>

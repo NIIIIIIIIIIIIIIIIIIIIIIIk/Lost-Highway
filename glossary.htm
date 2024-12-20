@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Словарь - Шоссе в никуда</title>
+    <style>
+        /* Добавьте стили для поиска */
+        .search-container {
+            margin-bottom: 20px;
+        }
+        .search-container input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-container">
+        <header>
+            <h1>Шоссе в никуда</h1>
+            <nav>
+                <ul>
+                    <li><a href="description.htm">Описание</a></li>
+                    <li><a href="glossary.htm" class="active">Словарь</a></li>
+                    <li><a href="gallery.htm">Галерея</a></li>
+                    <li><a href="quiz.htm">Тест</a></li>
+                    <li><a href="profile.htm">Личный кабинет</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="main-container">
+                <h2>Словарь</h2>
+                <p>Погрузитесь в мир загадок и тайн, где каждое слово — это ключ к пониманию.</p>
+                
+                <!-- Поле для поиска терминов -->
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Поиск термина..." onkeyup="filterTerms()">
+                </div>
+
+                <ul id="termsList">
+                    <li>
+                        <strong>№1:</strong> <em>Загадочные видеозаписи</em>
+                        <p>Сквозь тьму и свет, они шепчут тайны, которые могут привести к бездне. Каждый кадр — это отражение внутреннего мира, где реальность и вымысел переплетаются.</p>
+                    </li>
+                    <li>
+                        <strong>№2:</strong> <em>Фред</em>
+                        <p>Главный герой, потерянный в лабиринте своих страхов и желаний. Его путь — это шоссе, ведущее в никуда, где каждый поворот может стать последним.</p>
+                    </li>
+                    <li>
+                        <strong>№3:</strong> <em>Рене</em>
+                        <p>Женщина, чье присутствие окутано тайной. Она — свет и тень, любовь и предательство, отражение того, что Фред не может понять.</p>
+                    </li>
+                    <li>
+                        <strong>№4:</strong> <em>Детектив</em>
+                        <p>Странствующий по миру, где логика теряет смысл. Он ищет ответы, но находит лишь больше вопросов, погружаясь в бездну человеческой природы.</p>
+                    </li>
+                    <li>
+                        <strong>№5:</strong> <em>Тайна</em>
+                        <p>Слово, которое не имеет определения. Это то, что скрыто за завесой реальности, то, что заставляет нас искать, даже когда мы боимся узнать правду.</p>
+                    </li>
+                </ul>
+                <p>Каждое определение — это лишь начало. Погружайтесь в мир, где каждое слово может изменить вашу реальность.</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2023</p>
+        </footer>
+    </div>
+    
+    <script src="js/script.js"></script>
+    <script>
+        // Функция для фильтрации терминов
+        function filterTerms() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const termsList = document.getElementById('termsList');
+            const terms = termsList.getElementsByTagName('li');
+
+            for (let i =  0; i < terms.length; i++) {
+                const term = terms[i].textContent || terms[i].innerText;
+                if (term.toLowerCase().indexOf(filter) > -1) {
+                    terms[i].style.display = "";
+                } else {
+                    terms[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
