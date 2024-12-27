@@ -10,6 +10,10 @@
     <div class="content-container">
         <header>
             <h1>Шоссе в никуда</h1>
+            <div class="user-info">
+                <span id="username">Имя пользователя</span>
+                <button id="logoutButton" onclick="logout()">Выйти</button>
+            </div>
             <nav>
                 <ul>
                     <li><a href="description.htm">Описание</a></li>
@@ -40,13 +44,35 @@
                         <input type="text" name="question3" required>
                         <span class="result" id="result3"></span>
                     </div>
+                    <div>
+                        <label>4. Как зовут главного героя?</label>
+                        <input type="text" name="question4" required>
+                        <span class="result" id="result4"></span>
+                    </div>
+                    <div>
+                        <label>5. Город, в котором происходит действие?</label>
+                        <input type="text" name="question5" required>
+                        <span class="result" id="result5"></span>
+                    </div>
+                    <div>
+                        <label>6. Какова основная тема фильма?</label>
+                        <input type="text" name="question6" required>
+                        <span class="result" id="result6"></span>
+                    </div>
                     <button type="button" onclick="checkAnswers()">Проверить</button>
                     <button type="button" onclick="resetQuiz()">Начать тест заново</button>
                 </form>
                 <p id="score"></p>
             </div>
         </main>
+
+        <footer>
+            <p>&copy; 2024</p>
+            <p>Контактные данные: info@example.com | Телефон: +7 (123) 456-78-90</p>
+            <p>Подпись: Все права защищены.</p>
+        </footer>
     </div>
+    
     <script src="js/script.js"></script>
 </body>
 </html>

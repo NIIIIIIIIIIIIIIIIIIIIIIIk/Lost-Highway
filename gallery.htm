@@ -10,6 +10,10 @@
     <div class="content-container">
         <header>
             <h1>Шоссе в никуда</h1>
+            <div class="user-info">
+                <span id="username">Имя пользователя</span>
+                <button id="logoutButton" onclick="logout()">Выйти</button>
+            </div>
             <nav>
                 <ul>
                     <li><a href="description.htm">Описание</a></li>
@@ -23,56 +27,64 @@
 
         <main>
             <div class="main-container">
-            <h2>Галерея</h2>
-            <div class="slider">
-                <button class="prev" onclick="changeSlide(-1)">Назад</button>
-                <div class="slides">
-                    <img src="images/image1.jpg" alt="Слайд 1" class="slide active">
-                    <img src="images/image2.png" alt="Слайд 2" class="slide">
-                    <img src="images/image3.jpg" alt="Слайд 3" class="slide">
-                    <img src="images/image4.jpg" alt="Слайд 4" class="slide">
-                    <img src="images/image5.png" alt="Слайд 5" class="slide">
+                <h2>Галерея</h2>
+                <div class="slider">
+                    <button class="prev" onclick="changeSlide(-1)">Назад</button>
+                    <div class="slides">
+                        <img src="images/image1.jpg" alt="Слайд 1" class="slide active">
+                        <img src="images/image2.png" alt="Слайд 2" class="slide">
+                        <img src="images/image3.jpg" alt="Слайд 3" class="slide">
+                        <img src="images/image4.jpg" alt="Слайд 4" class="slide">
+                        <img src="images/image5.png" alt="Слайд 5" class="slide">
+                    </div>
+                    <button class="next" onclick="changeSlide(1)">Вперед</button>
+                    <p id="slideInfo">1 слайд из 5</p>
                 </div>
-                <button class="next" onclick="changeSlide(1)">Вперед</button>
-                <p id="slideInfo">1 слайд из 5</p>
             </div>
-    </main>
+        </main>
 
-    <footer>
-        <p>&copy; 2023</p>
-    </footer>
+        <footer>
+            <p>&copy; 2024</p>
+            <p>Контактные данные: info@example.com | Телефон: +7 (123) 456-78- 90</p>
+            <p>Подпись: Все права защищены.</p>
+        </footer>
 
-    <script src="js/script.js"></script>
-    <script>
-        let currentSlide = 0; // Индекс текущего слайда
-        const slides = document.querySelectorAll('.slide'); // Получаем все слайды
-        
-        // Функция для изменения слайда
-        function changeSlide(direction) {
-            // Скрываем текущий слайд
-            slides[currentSlide].classList.remove('active');
-        
-            // Обновляем индекс текущего слайда
-            currentSlide += direction;
-        
-            // Проверяем границы
-            if (currentSlide < 0) {
-                currentSlide = slides.length - 1; // Переход к последнему слайду
-            } else if (currentSlide >= slides.length) {
-                currentSlide = 0; // Переход к первому слайду
+        <script src="js/script.js"></script>
+        <script>
+            let currentSlide = 0; // Индекс текущего слайда
+            const slides = document.querySelectorAll('.slide'); // Получаем все слайды
+            
+            // Функция для изменения слайда
+            function changeSlide(direction) {
+                // Скрываем текущий слайд
+                slides[currentSlide].classList.remove('active');
+                
+                // Обновляем индекс текущего слайда
+                currentSlide += direction;
+                
+                // Проверяем границы
+                if (currentSlide < 0) {
+                    currentSlide = slides.length - 1; // Переход к последнему слайду
+                } else if (currentSlide >= slides.length) {
+                    currentSlide = 0; // Переход к первому слайду
+                }
+                
+                // Показываем новый слайд
+                slides[currentSlide].classList.add('active');
+                
+                // Обновляем информацию о текущем слайде
+                document.getElementById('slideInfo').textContent = `${currentSlide + 1} слайд из ${slides.length}`;
+                
+                // Обновляем положение слайдов для анимации
+                const offset = -currentSlide * 100; // Вычисляем смещение
+                document.querySelector('.slides').style.transform = `translateX(${offset}%)`;
             }
-        
-            // Показываем новый слайд
-            slides[currentSlide].classList.add('active');
-        
-            // Обновляем информацию о текущем слайде
-            document.getElementById('slideInfo').textContent = `${currentSlide + 1} слайд из ${slides.length}`;
-        }
-        
-        // Инициализация слайдера при загрузке страницы
-        window.onload = function() {
-            changeSlide(0); // Показываем первый слайд
-        };
+            
+            // Инициализация слайдера при загрузке страницы
+            window.onload = function() {
+                changeSlide(0); // Показываем первый слайд
+            };
         </script>
+    </div>
 </body>
 </html>

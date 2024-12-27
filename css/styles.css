@@ -34,6 +34,7 @@ strong {
 }
 
 .content-container {
+    min-height: calc(100% - 50px);
     background: rgba(18, 18, 18, 0.9); /* Полупрозрачный белый фон */
     padding: 20px; /* Отступы */
     border-radius: 10px; /* Закругленные углы */
@@ -139,23 +140,43 @@ footer {
     color: #ffcc00; /* Яркий текст */
 }
 
-/* Стили слайдера */
 .slider {
     position: relative;
+    max-width: 600px; /* Максимальная ширина слайдера */
+    margin: auto; /* Центрирование слайдера */
+    overflow: hidden; /* Скрытие лишнего контента */
+}
+.slides {
+    display: flex; /* Используем flexbox для горизонтального расположения слайдов */
+    transition: transform 0.5s ease; /* Плавный переход при смене слайдов */
+}
+.slide {
+    min-width: 100%; /* Каждый слайд занимает 100% ширины контейнера */
+    opacity: 0; /* Скрываем слайды по умолчанию */
+    transition: opacity 0.5s ease; /* Плавный переход для изменения прозрачности */
+}
+.slide.active {
+    opacity: 1; /* Показываем активный слайд */
+}
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный фон */
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10; /* Увеличиваем z-index, чтобы кнопки были поверх слайдов */
+}
+.prev {
+    left: 10px; /* Расположение кнопки "Назад" */
+}
+.next {
+    right: 10px; /* Расположение кнопки "Вперед" */
+}
+#slideInfo {
     text-align: center;
-    max-width: 800px; /* Установите максимальную ширину слайдера */
-    margin: 0 auto; /* Центрирование слайдера */
-    padding: 10px; /* Добавьте отступы */
-}
-
-.slider img {
-    display: none; 
-    width: 100%; 
-    max-height: 400px; /* Установите максимальную высоту для изображений */
-}
-
-.slider img.active {
-    display: block; 
+    margin-top: 10px;
 }
 
 button {
@@ -182,4 +203,24 @@ button:hover {
         transform: translateY(0);
         opacity: 1;
     }
+}
+
+.user-info {
+    display: flex; /* Используем flexbox для выравнивания имени и кнопки */
+    align-items: center; /* Выравнивание по центру по вертикали */
+}
+
+#logoutButton {
+    margin-left: 15px; /* Отступ слева от имени пользователя */
+    background-color: #d9534f; /* Цвет кнопки выхода */
+    color: white; /* Цвет текста кнопки */
+    border: none; /* Убираем рамку */
+    padding: 10px 15px; /* Отступы внутри кнопки */
+    border-radius: 5px; /* Закругленные углы */
+    cursor: pointer; /* Указатель при наведении */
+    transition: background-color 0.3s ease; /* Плавный переход цвета */
+}
+
+#logoutButton:hover {
+    background-color: #c9302c; /* Более темный цвет при наведении */
 }

@@ -2,51 +2,63 @@ function checkAnswers() {
     const answers = {
         question1: "1997",
         question2: "триллер",
-        question3: "Дэвид Линч"
+        question3: "Дэвид Линч",
+        question4: "Фредди",
+        question5: "Лос-Анжелес",
+        question6: "Потеря идентичности"
     };
 
     let score = 0;
+    const form = document.getElementById('quizForm');
+    
+    // Проверка ответов
     for (let question in answers) {
-        const userAnswer = document.querySelector(`input[name="${question}"]`).value;
-        const resultSpan = document.getElementById(`result${question.charAt(question.length - 1)}`);
+        const userAnswer = form[question].value.trim();
         if (userAnswer.toLowerCase() === answers[question].toLowerCase()) {
             score++;
-            resultSpan.textContent = "Ответ правильный!";
-            resultSpan.style.color = "green";
+            document.getElementById(`result${question.charAt(question.length - 1)}`).textContent = "Правильно!";
         } else {
-            resultSpan.textContent = `Ответ неправильный, правильный ответ: ${answers[question]}`;
-            resultSpan.style.color = "red";
+            document.getElementById(`result${question.charAt(question.length - 1)}`).textContent = "Неправильно!";
         }
     }
-    document.getElementById("score").textContent = `Ваш результат: ${score} из ${Object.keys(answers).length}`;
 
-    // Сохранение результата в localStorage
-    localStorage.setItem('lastTestScore', score);
+    // Отображение результата
+    document.getElementById('score').textContent = `Ваш результат: ${score} из ${Object.keys(answers).length}`;
+    
+    // Сохранение результата последнего теста в localStorage
+    localStorage.setItem('lastTestResult', `${score} из ${Object.keys(answers).length}`);
 }
 
-function loadResults() {
-    const lastScore = localStorage.getItem('lastTestScore');
-    if (lastScore !== null) {
-        alert(`Ваш последний результат: ${lastScore}`);
-        document.getElementById("score").textContent = `Ваш последний результат: ${lastScore}`;
+function loadLastTestResult() {
+    // Здесь вы можете получить результат теста из базы данных или локального хранилища
+    const lastResult = "0 из 3"; // Пример результата, замените на реальный
+    document.getElementById('lastTestResult').textContent = lastResult; // Отображаем результат
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const username = localStorage.getItem('username'); // Получаем имя пользователя
+    if (username) {
+        document.getElementById('username').textContent = username; // Устанавливаем имя пользователя в заголовке
     } else {
-        alert("Результаты теста не найдены.");
-        document.getElementById("score").textContent = "Результаты теста не найдены.";
+        document.getElementById('username').textContent = "Гость"; // Если имя пользователя не найдено
     }
-}
+});
 
 // Функция сброса теста
 function resetQuiz() {
-    // Сбрасываем форму
-    document.getElementById("quizForm").reset();
-    
-    // Очищаем результаты
-    document.getElementById("score").textContent = "";
-    const results = document.querySelectorAll(".result");
-    results.forEach(result => result.textContent = "");
-    
-    // Удаляем сохраненный результат из localStorage
-    localStorage.removeItem('lastTestScore');
+    const form = document.getElementById('quizForm');
+    form.reset();
+    document.getElementById('score').textContent = '';
+    document.getElementById('lastTestResult').textContent = 'Здесь будет отображаться результат последнего теста.';
+    for (let i = 1; i <= 6; i++) {
+        document.getElementById(`result${i}`).textContent = '';
+    }
+}
+
+// Функция для загрузки результата последнего теста в профиль
+function loadLastTestResult() {
+    const lastResult = localStorage.getItem('lastTestResult') || "Результат не найден";
+    document.getElementById('lastTestResult').textContent = lastResult; // Отображаем результат
 }
 
 // Функция выхода из системы
@@ -57,26 +69,6 @@ function logout() {
         alert("Вы вышли из системы.");
         window.location.href = "index.html"; // Перенаправление на страницу входа
     }
-}
-
-function loadProfile() {
-    const username = document.getElementById('username').value;
-    const dob = document.getElementById('dob').value;
-    const gender = document.getElementById('gender').value;
-
-    // Логирование значений
-    console.log("Username:", username);
-    console.log("Date of Birth:", dob);
-    console.log("Gender:", gender);
-
-    // Сохранение данных в localStorage
-    localStorage.setItem('username', username);
-    localStorage.setItem('dob', dob);
-    localStorage.setItem('gender', gender);
-
-    // Перенаправление на страницу профиля после сохранения данных
-    window.location.href = "profile.htm"; // Убедитесь, что у вас есть страница profile.htm
-    return false; // Предотвращаем отправку формы
 }
 
 // Функция для загрузки профиля пользователя
@@ -90,23 +82,29 @@ function displayProfile() {
     console.log("Stored Date of Birth:", dob);
     console.log("Stored Gender:", gender);
 
+    // Проверка и отображение данных
     if (username) {
         document.getElementById('profileUsername').textContent = username;
     } else {
-        console.log("Username not found in localStorage");
+        document.getElementById('profileUsername').textContent = "Имя пользователя не найдено";
     }
     if (dob) {
         document.getElementById('profileDob').textContent = dob;
     } else {
-        console.log("Date of Birth not found in localStorage");
+        document.getElementById('profileDob').textContent = "Дата рождения не найдена";
     }
     if (gender) {
         document.getElementById('profileGender').textContent = gender;
     } else {
-        console.log("Gender not found in localStorage");
+        document.getElementById('profileGender').textContent = "Пол не найден";
     }
+
+    // Загрузка результата последнего теста
+    loadLastTestResult();
 }
 
 window.onload = function() {
     displayProfile();
 };
+
+
