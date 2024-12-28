@@ -34,6 +34,9 @@ strong {
 }
 
 .content-container {
+    display: flex; /* Используем flexbox */
+    flex-direction: column; /* Вертикальное расположение элементов */
+    min-height: 100vh; /* Минимальная высота контейнера - 100% высоты окна */
     min-height: calc(100% - 50px);
     background: rgba(18, 18, 18, 0.9); /* Полупрозрачный белый фон */
     padding: 20px; /* Отступы */

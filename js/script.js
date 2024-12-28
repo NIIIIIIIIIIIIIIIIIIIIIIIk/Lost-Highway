@@ -10,23 +10,28 @@ function checkAnswers() {
 
     let score = 0;
     const form = document.getElementById('quizForm');
-    
+
     // Проверка ответов
     for (let question in answers) {
         const userAnswer = form[question].value.trim();
+        const resultElement = document.getElementById(`result${question.charAt(question.length - 1)}`);
+        
         if (userAnswer.toLowerCase() === answers[question].toLowerCase()) {
             score++;
-            document.getElementById(`result${question.charAt(question.length - 1)}`).textContent = "Правильно!";
+            resultElement.textContent = "Ответ правильный!";
+            resultElement.style.color = "green"; // Стилизация для правильного ответа
         } else {
-            document.getElementById(`result${question.charAt(question.length - 1)}`).textContent = "Неправильно!";
+            resultElement.textContent = `Ответ неправильный, правильный ответ: ${answers[question]}`;
+            resultElement.style.color = "red"; // Стилизация для неправильного ответа
         }
     }
 
     // Отображение результата
     document.getElementById('score').textContent = `Ваш результат: ${score} из ${Object.keys(answers).length}`;
     
-    // Сохранение результата последнего теста в localStorage
-    localStorage.setItem('lastTestResult', `${score} из ${Object.keys(answers).length}`);
+    
+    // Деактивация кнопки "Пройти тест заново"
+    resetButton.disabled = true;
 }
 
 function loadLastTestResult() {
@@ -45,15 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // Функция сброса теста
-function resetQuiz() {
-    const form = document.getElementById('quizForm');
-    form.reset();
-    document.getElementById('score').textContent = '';
-    document.getElementById('lastTestResult').textContent = 'Здесь будет отображаться результат последнего теста.';
-    for (let i = 1; i <= 6; i++) {
-        document.getElementById(`result${i}`).textContent = '';
-    }
-}
+
 
 // Функция для загрузки результата последнего теста в профиль
 function loadLastTestResult() {
@@ -71,6 +68,48 @@ function logout() {
     }
 }
 
+function saveData() {
+    const username = document.getElementById('username').value;
+    const dob = document.getElementById('dob').value;
+    const gender = document.getElementById('gender').value;
+
+    localStorage.setItem('username', username);
+    localStorage.setItem('dob', dob);
+    localStorage.setItem('gender', gender);
+}
+
+function validateForm() {
+    let isValid = true;
+
+    // Проверка логина
+    const username = document.getElementById('username').value;
+    if (!/^[а-яА-ЯёЁa-zA-Z0-9]{4,10}$/.test(username)) {
+        document.getElementById('usernameError').textContent = 'Логин должен содержать 4-10 символов.';
+        isValid = false;
+    }
+
+    // Проверка даты рождения
+    const dob = document.getElementById('dob').value;
+    if (!dob) {
+        document.getElementById('dobError').textContent = 'Пожалуйста, введите дату рождения.';
+        isValid = false;
+    }
+
+    // Проверка пола
+    const gender = document.getElementById('gender').value;
+    if (!gender) {
+        document.getElementById('genderError').textContent = 'Пожалуйста, выберите пол.';
+        isValid = false;
+    }
+
+    // Если форма валидна, сохраняем данные и перенаправляем
+    if (isValid) {
+        saveData(); // Сохраняем данные в localStorage
+        return true; // Позволяем отправить форму
+    }
+
+    return false; // Останавливаем отправку формы
+}
 // Функция для загрузки профиля пользователя
 function displayProfile() {
     const username = localStorage.getItem('username');
